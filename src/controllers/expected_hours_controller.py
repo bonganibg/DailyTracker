@@ -1,11 +1,11 @@
 from src.models.expected_hours_model import ExpectedHour
-from src.services.database_service_interface import DatabaseServiceInterface
+from src.services.supabase_client_service import SupabaseClientService
 
 class ExpectedHoursController():
     TABLE_NAME = "expected_hours"
 
 
-    def __init__(self, database_service: DatabaseServiceInterface) -> None:
+    def __init__(self, database_service: SupabaseClientService) -> None:
         self.__database_service = database_service
         
 
@@ -14,10 +14,8 @@ class ExpectedHoursController():
 
         for expected_hour in expceted_hours_dict:
             self.__database_service.insert(self.TABLE_NAME, expected_hour.model_dump())
-        
-    
 
-'''
-Gets the expected working hours in the form of a JSON object,
-We need to deconstruct this object so that we can work with it in our code.
-'''
+    def get_expected_hours(self, user_id: str) -> list[ExpectedHour]:
+        expected_hours = self.__database_service.fetch_all(self.TABLE_NAME)
+
+        return [ExpectedHour(**expected_hour) for expected_hour in expected_hours]
