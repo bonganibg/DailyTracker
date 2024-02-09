@@ -1,5 +1,5 @@
-from models.overtime_model import Overtime
-from services.supabase_client_service import SupabaseClientService
+from src.models.overtime_model import Overtime
+from src.services.supabase_client_service import SupabaseClientService
 
 class OvertimeController():
     TABLE_NAME = 'overtime'

@@ -1,5 +1,5 @@
-from services.supabase_client_service import SupabaseClientService
-from models.hours_off_model import HoursOff
+from src.services.supabase_client_service import SupabaseClientService
+from src.models.hours_off_model import HoursOff
 
 class HoursOffController():
     TABLE_NAME = 'hours_off'

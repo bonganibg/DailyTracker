@@ -1,6 +1,6 @@
 import datetime
-from services.supabase_client_service import SupabaseClientService
-from models.hours_worked_model import HoursWorked
+from src.services.supabase_client_service import SupabaseClientService
+from src.models.hours_worked_model import HoursWorked
 
 class HoursWorkedController():
     TABLE_NAME = 'hours_worked'
