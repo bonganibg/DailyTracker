@@ -1,5 +1,5 @@
-from models.user_model import User
-from services.supabase_client_service import SupabaseClientService
+from src.models.user_model import User
+from src.services.supabase_client_service import SupabaseClientService
 
 class UserController():
     TABLE_NAME = 'user_details'
