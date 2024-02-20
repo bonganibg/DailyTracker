@@ -14,4 +14,9 @@ class UserController():
 
     def get_user_details(self, user_id: str) -> User:
         res = self.__database_service.fetch_one(self.TABLE_NAME, user_id).data
-        return User(**res)
+        
+        if (len(res) == 0):
+            return None
+        
+        user_details = res[0]
+        return User(**user_details)

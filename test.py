@@ -1,9 +1,9 @@
 from src.services.supabase_client_service import SupabaseClientService
-from src.models.expected_hours_model import ExpectedHour
-from src.controllers.expected_hours_controller import ExpectedHoursController
+from src.controllers.user_controller import UserController
 
 client = SupabaseClientService()
-controller = ExpectedHoursController(client)
+controller = UserController(client)
 
-result = controller.get_expected_hours("a429c6f2-fe27-4499-8258-4555918bdd94")
-print(result)
+# result = controller.get_expected_hours("a429c6f2-fe27-4499-8258-4555918bdd94")
+result = controller.get_user_details("a429c6f2-fe27-4499-8258-4555918bdd94")
+print(result.id)
