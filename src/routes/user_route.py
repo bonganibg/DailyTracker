@@ -20,7 +20,7 @@ router = APIRouter(
 
 @router.get("/", status_code=200)
 def get_users(user_id: str) -> User:
-    return user_controller.get_user_details(user_id)
+    user_controller.get_user_details(user_id)
 
 @router.put("/", status_code=200)
 def update_user(user: User) -> User:
