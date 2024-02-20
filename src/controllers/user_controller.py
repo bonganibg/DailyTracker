@@ -13,5 +13,5 @@ class UserController():
         self.__database_service.update(self.TABLE_NAME, user_details, user_id)
 
     def get_user_details(self, user_id: str) -> User:
-        res = self.__database_service.fetch_one(self.TABLE_NAME, user_id)
+        res = self.__database_service.fetch_one(self.TABLE_NAME, user_id).data
         return User(**res)

@@ -16,7 +16,7 @@ class HoursWorkedController():
             self.__database_service.insert(self.TABLE_NAME, hours_worked.model_dump())
 
     def get_hours_worked(self, user_id: str, start_date: datetime, end_date: datetime) -> list[HoursWorked]:
-        response = self.__database_service.get_in_date_range(self.TABLE_NAME, user_id, start_date, end_date)
+        response = self.__database_service.get_in_date_range(self.TABLE_NAME, user_id, start_date, end_date).data
 
         hours_worked = [HoursWorked(**hour) for hour in response]
         return hours_worked

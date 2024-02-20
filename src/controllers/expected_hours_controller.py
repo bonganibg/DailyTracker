@@ -16,6 +16,6 @@ class ExpectedHoursController():
             self.__database_service.insert(self.TABLE_NAME, expected_hour.model_dump())
 
     def get_expected_hours(self, user_id: str) -> list[ExpectedHour]:
-        expected_hours = self.__database_service.fetch_all(self.TABLE_NAME)
+        expected_hours = self.__database_service.fetch_all(self.TABLE_NAME, user_id).data
 
         return [ExpectedHour(**expected_hour) for expected_hour in expected_hours]

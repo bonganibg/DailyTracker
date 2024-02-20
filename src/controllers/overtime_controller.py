@@ -15,5 +15,5 @@ class OvertimeController():
             self.__database_service.insert(self.TABLE_NAME, overtime.model_dump())
 
     def get_overtime(self, user_id: str, start_date: str, end_date: str):
-        res = self.__database_service.get_in_date_range(self.TABLE_NAME, user_id, start_date, end_date)
+        res = self.__database_service.get_in_date_range(self.TABLE_NAME, user_id, start_date, end_date).data
         return [Overtime(**overtime) for overtime in res]
