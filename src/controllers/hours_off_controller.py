@@ -16,6 +16,7 @@ class HoursOffController():
 
     def get_hours_off(self, user_id: str, start_date: str, end_date: str):
         res = self.__database_service.get_in_date_range(self.TABLE_NAME, user_id, start_date, end_date).data
-        return [HoursOff(**hour) for hour in res]
+        
+        return [HoursOff(**date) for date in res]
 
     
