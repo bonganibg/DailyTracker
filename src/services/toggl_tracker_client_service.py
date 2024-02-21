@@ -7,12 +7,13 @@ from requests.models import Response
 from src.services.models.toggl_event_model import TogglEvent
 from src.services.models.toggl_workspace_model import TogglWorkspace
 from src.services.models.toggl_project_model import TogglProject
+from src.services.models.toggl_auth_model import TogglUserAuth
 
-class TogglService:
+class TogglClient:
 
-    def login(self, email: str, password: str):
+    def login(self, user_auth: TogglUserAuth):
         try:
-            response = requests.get("https://api.track.toggl.com/api/v9/me", auth=(email, password), timeout=10)
+            response = requests.get("https://api.track.toggl.com/api/v9/me", auth=(user_auth.email, user_auth.password), timeout=10)
         except Exception as e:
             print(e)
             return None
@@ -31,7 +32,7 @@ class TogglService:
             return None
         
         if (not self.__is_successful(response)):
-            return None
+            return False
         
         results = response.json()
 
@@ -47,13 +48,15 @@ class TogglService:
             return None
         
         if (not self.__is_successful(response)):
-            return None
+            return False
         
         response = response.json()
 
         return [TogglProject(**result) for result in response]
     
-    def create_toggl_event(self, event: TogglEvent, wid: int,  api_token: str):
+    def create_toggl_event(self, event: TogglEvent,  api_token: str):
+        wid = event.workspace_id
+        
         url = f"https://api.track.toggl.com/api/v9/workspaces/{wid}/time_entries"
 
         data = json.dumps(event.model_dump())
