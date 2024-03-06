@@ -12,6 +12,7 @@ from src.services.models.toggl_auth_model import TogglUserAuth
 class TogglClient:
 
     def login(self, user_auth: TogglUserAuth):
+        print("we in here")
         try:
             response = requests.get("https://api.track.toggl.com/api/v9/me", auth=(user_auth.email, user_auth.password), timeout=10)
         except Exception as e:
@@ -19,6 +20,7 @@ class TogglClient:
             return None
         
         if (self.__is_successful(response)):
+            print(response.json())
             api_token = response.json()["api_token"]
             return api_token
         
